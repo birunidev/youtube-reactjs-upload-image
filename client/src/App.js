@@ -12,18 +12,22 @@ function App() {
   }
 
   function handleSave() {
-    // save image to backend
-    let formData = new FormData();
-    formData.append("photo", saveImage);
+    if (saveImage) {
+      // save image to backend
+      let formData = new FormData();
+      formData.append("photo", saveImage);
 
-    fetch("http://localhost:4000/api/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        window.location.href = data.image;
-      });
+      fetch("http://localhost:4000/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          window.location.href = data.image;
+        });
+    } else {
+      alert("Upload gambar dulu");
+    }
   }
 
   return (
